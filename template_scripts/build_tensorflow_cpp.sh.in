@@ -1,5 +1,11 @@
 #!/bin/bash
 
+cd /tmp
+git clone --depth 1 --branch @TENSORFLOW_VERSION@ https://github.com/tensorflow/tensorflow.git
+cd tensorflow
+
+printf "\n\nN\nY\nY\n\nN\n\n\nN\n" | ./configure
+
 bazel build --config=opt --config=cuda //tensorflow:libtensorflow.so
 bazel build --config=opt --config=cuda //tensorflow:libtensorflow_cc.so
 bazel build --config=opt --config=cuda //tensorflow:install_headers
